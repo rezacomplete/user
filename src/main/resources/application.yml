@@ -15,3 +15,9 @@ spring:
   h2:
     console:
       enabled: true
+  application:
+    name: user
+  profiles:
+    active: default
+  config:
+    import: configserver:http://localhost:8083
