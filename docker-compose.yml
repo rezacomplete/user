@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+    user:
+      image: rezacomplete/user
+      mem_limit: 700m
+      ports:
+        - "8080:8080"
+      networks:
+        - user-network
+
+    education:
+      image: rezacomplete/education
+      mem_limit: 700m
+      ports:
+        - "8082:8082"
+      networks:
+        - user-network
+
+    post:
+      image: rezacomplete/post
+      mem_limit: 700m
+      ports:
+        - "8081:8081"
+      networks:
+        - user-network
+
+networks:
+  user-network:
