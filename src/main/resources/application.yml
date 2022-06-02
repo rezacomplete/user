@@ -16,8 +16,8 @@ spring:
     console:
       enabled: true
   application:
-    name: user
+    name: education
   profiles:
     active: default
   config:
-    import: configserver:http://localhost:8083
+    import: configserver:http://configserver:8083

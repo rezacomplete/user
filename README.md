@@ -8,8 +8,11 @@ docker build . -t rezacomplete/user
 docker push docker.io/rezacomplete/user
 ```
 ```
-docker compose up
+kubectl apply -f workloads.yml
 ```
 ```
-docker compose stop
+kubectl apply -f services.yml
+```
+```
+curl --request GET 'http://localhost:30020/users/rezacomplete@gmail.com'
 ```
