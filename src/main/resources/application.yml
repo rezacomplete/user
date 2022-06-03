@@ -16,7 +16,7 @@ spring:
     console:
       enabled: true
   application:
-    name: education
+    name: user
   profiles:
     active: default
   config:

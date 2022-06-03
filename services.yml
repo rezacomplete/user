@@ -11,3 +11,31 @@ spec:
       port: 8080
       nodePort: 30020
   type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: education
+
+spec:
+  selector:
+    app: education
+  ports:
+    - name: http
+      port: 8082
+      nodePort: 30022
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: post
+
+spec:
+  selector:
+    app: post
+  ports:
+    - name: http
+      port: 8081
+      nodePort: 30021
+  type: NodePort
