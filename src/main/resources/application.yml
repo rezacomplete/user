@@ -17,7 +17,17 @@ spring:
       enabled: true
   application:
     name: user
-  profiles:
-    active: default
   config:
-    import: configserver:http://configserver:8083
+    activate:
+      on-profile: default
+    import: configserver:http://localhost:8083
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+url:
+  post: http://localhost:8081
+  education: http://localhost:8082

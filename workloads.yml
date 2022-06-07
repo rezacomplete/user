@@ -17,7 +17,9 @@ spec:
           image: rezacomplete/user
           env:
             - name: SPRING_PROFILES_ACTIVE
-              value: default
+              value: prod
+            - name: SPRING_CONFIG_IMPORT
+              value: configserver:http://configserver:8083
 ---
 apiVersion: apps/v1
 kind: Deployment
