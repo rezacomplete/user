@@ -17,10 +17,15 @@ spring:
       enabled: true
   application:
     name: user
-  config:
-    activate:
-      on-profile: default
-    import: configserver:http://localhost:8083
+#  config:
+#    activate:
+#      on-profile: default
+#    import: configserver:http://localhost:8083
+  sleuth:
+    sampler:
+      percentage: 1
+  zipkin:
+    baseUrl: http://localhost:9411/
 
 management:
   endpoints:

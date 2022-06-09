@@ -17,9 +17,25 @@ spec:
           image: rezacomplete/user
           env:
             - name: SPRING_PROFILES_ACTIVE
-              value: prod
-            - name: SPRING_CONFIG_IMPORT
-              value: configserver:http://configserver:8083
+              valueFrom:
+                configMapKeyRef:
+                  name: my-configmap
+                  key: SPRING_PROFILES_ACTIVE
+            - name: SPRING_ZIPKIN_BASEURL
+              valueFrom:
+                configMapKeyRef:
+                  name: my-configmap
+                  key: SPRING_ZIPKIN_BASEURL
+            - name: URL_POST
+              valueFrom:
+                configMapKeyRef:
+                  name: my-configmap
+                  key: URL_POST
+            - name: URL_EDUCATION
+              valueFrom:
+                configMapKeyRef:
+                  name: my-configmap
+                  key: URL_EDUCATION
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -40,7 +56,16 @@ spec:
           image: rezacomplete/education
           env:
             - name: SPRING_PROFILES_ACTIVE
-              value: default
+              valueFrom:
+                configMapKeyRef:
+                  name: my-configmap
+                  key: SPRING_PROFILES_ACTIVE
+            - name: SPRING_ZIPKIN_BASEURL
+              valueFrom:
+                configMapKeyRef:
+                  name: my-configmap
+                  key: SPRING_ZIPKIN_BASEURL
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -61,4 +86,35 @@ spec:
           image: rezacomplete/post
           env:
             - name: SPRING_PROFILES_ACTIVE
-              value: default
+              valueFrom:
+                configMapKeyRef:
+                  name: my-configmap
+                  key: SPRING_PROFILES_ACTIVE
+            - name: SPRING_ZIPKIN_BASEURL
+              valueFrom:
+                configMapKeyRef:
+                  name: my-configmap
+                  key: SPRING_ZIPKIN_BASEURL
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zipkin
+  labels:
+    app: zipkin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zipkin
+  template:
+    metadata:
+      labels:
+        app: zipkin
+    spec:
+      containers:
+        - name: zipkin
+          image: openzipkin/zipkin
+          ports:
+            - containerPort: 9411
